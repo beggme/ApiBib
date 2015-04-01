@@ -1,4 +1,4 @@
-package com.example.mehdibeggas.apibib_apresreunion;
+package main;
 
 import android.content.Intent;
 import android.graphics.Point;
@@ -7,12 +7,13 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.Display;
 
 import activity.Login;
+import objets.Resolution;
 
 
 public class MainActivity extends ActionBarActivity {
 
-    final String EXTRA_WIDTH = "screen_width";
-    final String EXTRA_HEIGHT = "screen_height";
+    final String RESOLUTION = "resolution";
+    Resolution resolution;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,16 +22,21 @@ public class MainActivity extends ActionBarActivity {
 
         Intent intent = new Intent(MainActivity.this, Login.class);
 
+        resolution = getResolution();
+
+        intent.putExtra(RESOLUTION, resolution);
+
+        startActivity(intent);
+
+    }
+
+    private Resolution getResolution(){
+
         Display myDisplay = getWindowManager().getDefaultDisplay();
         Point point = new Point();
         myDisplay.getSize(point);
-        int width = point.x;
-        int height = point.y;
 
-        intent.putExtra(EXTRA_WIDTH, width);
-        intent.putExtra(EXTRA_HEIGHT, width);
-
-        startActivity(intent);
+        return new Resolution(point.x, point.y);
 
     }
 

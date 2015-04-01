@@ -7,13 +7,15 @@ import android.widget.TextView;
 
 import com.example.mehdibeggas.apibib_apresreunion.R;
 
+import objets.Resolution;
+
 /**
  * Created by mehdibeggas on 25/03/2015.
  */
 public class Login extends Activity{
 
-    final String EXTRA_WIDTH = "screen_width";
-    final String EXTRA_HEIGHT = "screen_height";
+    final String RESOLUTION = "resolution";
+    Resolution resolution;
 
     private Intent intent;
     private int width;
@@ -29,8 +31,7 @@ public class Login extends Activity{
 
         if (intent != null){
 
-            width = intent.getIntExtra(EXTRA_WIDTH, 0);
-            height = intent.getIntExtra(EXTRA_HEIGHT, 0);
+            resolution = intent.getExtras().getParcelable(RESOLUTION);
 
         }
 
