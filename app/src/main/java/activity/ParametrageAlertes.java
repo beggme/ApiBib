@@ -1,6 +1,5 @@
 package activity;
 
-import android.app.Activity;
 import android.os.Bundle;
 
 import com.example.mehdibeggas.apibib_apresreunion.R;
@@ -8,7 +7,7 @@ import com.example.mehdibeggas.apibib_apresreunion.R;
 /**
  * Created by mehdibeggas on 31/03/2015.
  */
-public class ParametrageAlertes extends Activity {
+public class ParametrageAlertes extends MenuNavigation {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
