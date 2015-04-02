@@ -13,7 +13,7 @@ public class Parametres extends MenuNavigation {
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_parametres_initiaux);
+        setContentView(R.layout.activity_parametres);
 
     }
 

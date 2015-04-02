@@ -18,6 +18,8 @@ public class MenuNavigation extends Activity {
 
     protected void onCreate(Bundle savedInstanceState) {
 
+        super.onCreate(savedInstanceState);
+
         intent = getIntent();
 
         if (intent != null){
