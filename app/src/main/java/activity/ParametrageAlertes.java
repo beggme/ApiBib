@@ -1,6 +1,8 @@
 package activity;
 
+import android.app.DialogFragment;
 import android.os.Bundle;
+import android.view.View;
 
 import com.example.mehdibeggas.apibib_apresreunion.R;
 
@@ -15,6 +17,11 @@ public class ParametrageAlertes extends MenuNavigation {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_parametrage_alerte);
 
+    }
+
+    public void openTimePicker(View v) {
+        DialogFragment newFragment = new TimePickerFragment();
+        newFragment.show(getFragmentManager(), "timepicker");
     }
 
 }

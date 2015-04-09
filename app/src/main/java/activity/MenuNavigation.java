@@ -48,7 +48,16 @@ public class MenuNavigation extends Activity {
 
     public boolean gotoParametres(View v) {
 
-        intent = new Intent(this, Parametres.class);
+        intent = new Intent(this, ParametresInitiaux.class);
+        intent.putExtra(RESOLUTION, resolution);
+        startActivity(intent);
+        return false;
+
+    }
+
+    public boolean gotoIndicateurs(View v) {
+
+        intent = new Intent(this, Indicateurs.class);
         intent.putExtra(RESOLUTION, resolution);
         startActivity(intent);
         return false;
