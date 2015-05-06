@@ -6,28 +6,31 @@
     android:weightSum="4"
     android:layout_alignParentBottom="true">
 
-    <Button
+    <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Paramétrage Alertes"
+        android:background="@drawable/bouton_alarme"
         android:onClick="gotoParametrageAlertes"
         android:layout_weight="1" />
 
-    <Button
+    <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Statistiques"
+        android:background="@drawable/bouton_graphique"
         android:onClick="gotoStatistiques"
         android:layout_weight="1" />
 
-    <Button
+    <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Paramètres"
+        android:background="@drawable/bouton_param"
         android:onClick="gotoParametres"
         android:layout_weight="1" />
 
-    <Button
+    <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Indicateurs"
