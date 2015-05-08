@@ -10,31 +10,31 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Paramétrage Alertes"
-        android:background="@drawable/bouton_alarme"
         android:onClick="gotoParametrageAlertes"
-        android:layout_weight="1" />
+        android:background="@drawable/cloche"/>
 
     <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Statistiques"
-        android:background="@drawable/bouton_graphique"
         android:onClick="gotoStatistiques"
-        android:layout_weight="1" />
+        android:background="@drawable/graph"/>
+
 
     <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Paramètres"
-        android:background="@drawable/bouton_param"
         android:onClick="gotoParametres"
-        android:layout_weight="1" />
+        android:background="@drawable/roue"/>
+
 
     <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Indicateurs"
         android:onClick="gotoIndicateurs"
-        android:layout_weight="1" />
+        android:background="@drawable/graph"/>
+
 
 </LinearLayout>
