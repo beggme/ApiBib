@@ -1,40 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+    android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:weightSum="4"
+    android:gravity="center_horizontal"
     android:layout_alignParentBottom="true">
 
     <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Paramétrage Alertes"
-        android:onClick="gotoParametrageAlertes"
-        android:background="@drawable/cloche"/>
-
-    <ImageButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Statistiques"
-        android:onClick="gotoStatistiques"
-        android:background="@drawable/graph"/>
-
-
-    <ImageButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Paramètres"
-        android:onClick="gotoParametres"
-        android:background="@drawable/roue"/>
-
-
-    <ImageButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_gravity="center_horizontal"
         android:text="Indicateurs"
         android:onClick="gotoIndicateurs"
         android:background="@drawable/graph"/>
 
+    <View android:layout_height="fill_parent"
+        android:layout_width="4px"
+        android:background="#ffffff"/>
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_gravity="center_horizontal"
+        android:text="Paramétrage Alertes"
+        android:onClick="gotoParametrageAlertes"
+        android:background="@drawable/cloche"/>
+
+    <View android:layout_height="fill_parent"
+        android:layout_width="4px"
+        android:background="#ffffff"/>
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_gravity="center_horizontal"
+        android:text="Statistiques"
+        android:onClick="gotoStatistiques"
+        android:background="@drawable/graph"/>
+
+    <View android:layout_height="fill_parent"
+        android:layout_width="4px"
+        android:background="#ffffff"/>
+
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_gravity="center_horizontal"
+        android:text="Paramètres"
+        android:onClick="gotoParametres"
+        android:background="@drawable/roue"/>
 
 </LinearLayout>

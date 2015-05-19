@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
-    android:background="@drawable/fond_vert">
+    android:background="#75B98A">
 
     <ImageView
         android:layout_width="fill_parent"
@@ -21,7 +21,7 @@
             android:layout_height="wrap_content"
             android:hint="Login"
             android:layout_gravity="left"
-            android:drawableLeft="@drawable/profil"
+            android:id="@+id/login"
             android:inputType="textEmailAddress"/>
 
         <EditText
@@ -29,8 +29,8 @@
             android:layout_height="wrap_content"
             android:hint="Mot de passe"
             android:inputType="textPassword"
-            android:layout_gravity="left"
-            android:drawableLeft="@drawable/log"/>
+            android:id="@+id/mdp"
+            android:layout_gravity="left"/>
     </LinearLayout>
 
     <Button
@@ -38,7 +38,6 @@
         android:layout_height="wrap_content"
         android:text="Connexion"
         android:onClick="connexion"
-        android:layout_gravity="center"
-        android:textColor="#ffffff"/>
+        android:layout_gravity="center"/>
 
 </LinearLayout>
