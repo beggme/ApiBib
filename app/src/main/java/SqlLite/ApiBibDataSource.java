@@ -3,13 +3,18 @@ package SqlLite;
 /**
  * Created by mehdibeggas on 11/05/2015.
  */
+
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class ApiBibDataSource {
@@ -19,8 +24,20 @@ public class ApiBibDataSource {
     private MySQLiteHelper dbHelper;
     private String[] whereArgs;
 
+    DateFormat format_date_heure = new SimpleDateFormat("HH:mm dd-MM-yyyy");
+    DateFormat format_date = new SimpleDateFormat("dd-MM-yyyy");
+    DateFormat format_heure = new SimpleDateFormat("HH:mm");
+
     private String[] allColumnsUtilisateur = { MySQLiteHelper.COLUMN_ID_UTILISATEUR,
             MySQLiteHelper.COLUMN_LOGIN, MySQLiteHelper.COLUMN_MDP};
+
+    private String[] allColumnsBebe = { MySQLiteHelper.COLUMN_ID_BEBE,
+            MySQLiteHelper.COLUMN_NOM, MySQLiteHelper.COLUMN_PRENOM, MySQLiteHelper.COLUMN_AGE,
+            MySQLiteHelper.COLUMN_POIDS, MySQLiteHelper.COLUMN_REF_UTILISATEUR};
+
+    private String[] allColumnsRepas = { MySQLiteHelper.COLUMN_ID_REPAS,
+            MySQLiteHelper.COLUMN_QUANTITE, MySQLiteHelper.COLUMN_DUREE,
+            MySQLiteHelper.COLUMN_DATE, MySQLiteHelper.COLUMN_HEURE, MySQLiteHelper.COLUMN_REF_BEBE};
 
     public ApiBibDataSource(Context context) {
         dbHelper = new MySQLiteHelper(context);
@@ -60,10 +77,8 @@ public class ApiBibDataSource {
         database.delete(MySQLiteHelper.TABLE_UTILISATEURS, null, null);
     }
 
-    public List<Utilisateur> getAllUtilisateur() {
+    public List<Utilisateur> getUtilisateur() {
         List<Utilisateur> utilisateurs = new ArrayList<Utilisateur>();
-
-        whereArgs = new String[]{"Mehdi"};
 
         Cursor cursor = database.query(MySQLiteHelper.TABLE_UTILISATEURS,
                 allColumnsUtilisateur, MySQLiteHelper.COLUMN_LOGIN + "=?", whereArgs, null, null, null);
@@ -79,8 +94,9 @@ public class ApiBibDataSource {
         return utilisateurs;
     }
 
-    public List<Utilisateur> getAllUtilisateur(String login) {
+    public List<Utilisateur> getUtilisateur(String login) {
         List<Utilisateur> utilisateurs = new ArrayList<Utilisateur>();
+        Utilisateur utilisateur;
 
         whereArgs = new String[]{login};
 
@@ -89,7 +105,7 @@ public class ApiBibDataSource {
 
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
-            Utilisateur utilisateur = cursorToUtilisateur(cursor);
+            utilisateur = cursorToUtilisateur(cursor);
             utilisateurs.add(utilisateur);
             cursor.moveToNext();
         }
@@ -105,4 +121,187 @@ public class ApiBibDataSource {
         utilisateur.setMdp(cursor.getString(2));
         return utilisateur;
     }
+
+    public Bebe createBebe(int ref_utilisateur, String nom, String prenom, long age, double poids) {
+        ContentValues values = new ContentValues();
+        values.put(MySQLiteHelper.COLUMN_REF_UTILISATEUR, ref_utilisateur);
+        values.put(MySQLiteHelper.COLUMN_NOM, nom);
+        values.put(MySQLiteHelper.COLUMN_PRENOM, prenom);
+        values.put(MySQLiteHelper.COLUMN_AGE, age);
+        values.put(MySQLiteHelper.COLUMN_POIDS, poids);
+        long insertId = database.insert(MySQLiteHelper.TABLE_UTILISATEURS, null,
+                values);
+        Cursor cursor = database.query(MySQLiteHelper.TABLE_UTILISATEURS,
+                allColumnsUtilisateur, MySQLiteHelper.COLUMN_ID_UTILISATEUR + " = " + insertId, null,
+                null, null, null, null);
+        cursor.moveToFirst();
+        Bebe newBebe = cursorToBebe(cursor);
+        cursor.close();
+        return newBebe;
+    }
+
+    public void deleteBebe(Bebe bebe) {
+        long id = bebe.getId();
+        System.out.println("Comment deleted with id: " + id);
+        database.delete(MySQLiteHelper.TABLE_BEBE, MySQLiteHelper.COLUMN_ID_BEBE
+                + " = " + id, null);
+    }
+
+    public void deleteAllBebe() {
+        database.delete(MySQLiteHelper.TABLE_BEBE, null, null);
+    }
+
+    public List<Bebe> getBebe() {
+        List<Bebe> bebes = new ArrayList<Bebe>();
+        Bebe bebe;
+
+        Cursor cursor = database.query(MySQLiteHelper.TABLE_BEBE,
+                allColumnsBebe, null, null, null, null, null);
+
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+            bebe = cursorToBebe(cursor);
+            bebes.add(bebe);
+            cursor.moveToNext();
+        }
+        // make sure to close the cursor
+        cursor.close();
+        return bebes;
+    }
+
+    public List<Bebe> getBebe(Utilisateur utilisateur) {
+        List<Bebe> bebes = new ArrayList<Bebe>();
+        Bebe bebe;
+
+        whereArgs = new String[]{"" + utilisateur.getId()};
+
+        Cursor cursor = database.query(MySQLiteHelper.TABLE_UTILISATEURS,
+                allColumnsUtilisateur, MySQLiteHelper.COLUMN_REF_UTILISATEUR + "=?", whereArgs, null, null, null);
+
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+            bebe = cursorToBebe(cursor);
+            bebes.add(bebe);
+            cursor.moveToNext();
+        }
+        // make sure to close the cursor
+        cursor.close();
+        return bebes;
+    }
+
+    private Bebe cursorToBebe(Cursor cursor) {
+        Bebe bebe = new Bebe();
+        bebe.setId(cursor.getLong(0));
+        bebe.setNom(cursor.getString(1));
+        bebe.setPrenom(cursor.getString(2));
+        bebe.setAge(cursor.getInt(3));
+        bebe.setPoids(cursor.getDouble(4));
+        bebe.setRef_utilisateur(cursor.getInt(5));
+        return bebe;
+    }
+
+    public Repas createRepas(long quantite, long duree, Date date_heure, long ref_bebe) {
+        ContentValues values = new ContentValues();
+        values.put(MySQLiteHelper.COLUMN_REF_BEBE, ref_bebe);
+        values.put(MySQLiteHelper.COLUMN_QUANTITE, quantite);
+        values.put(MySQLiteHelper.COLUMN_DUREE, duree);
+        values.put(MySQLiteHelper.COLUMN_DATE, format_date.format(date_heure));
+        values.put(MySQLiteHelper.COLUMN_HEURE, format_heure.format(date_heure));
+        long insertId = database.insert(MySQLiteHelper.TABLE_REPAS, null,
+                values);
+        Cursor cursor = database.query(MySQLiteHelper.TABLE_REPAS,
+                allColumnsRepas, MySQLiteHelper.COLUMN_ID_REPAS + " = " + insertId, null,
+                null, null, null, null);
+        cursor.moveToFirst();
+        Repas newRepas = cursorToRepas(cursor);
+        cursor.close();
+        return newRepas;
+    }
+
+    public void deleteRepas(Repas repas) {
+        long id = repas.getId();
+        System.out.println("Repas deleted with id: " + id);
+        database.delete(MySQLiteHelper.TABLE_REPAS, MySQLiteHelper.COLUMN_ID_REPAS
+                + " = " + id, null);
+    }
+
+    public void deleteAllRepas() {
+        database.delete(MySQLiteHelper.TABLE_REPAS, null, null);
+    }
+
+    public List<Repas> getRepas() {
+        List<Repas> repass = new ArrayList<Repas>();
+        Repas repas;
+
+        Cursor cursor = database.query(MySQLiteHelper.TABLE_REPAS,
+                allColumnsBebe, null, null, null, null, null);
+
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+            repas = cursorToRepas(cursor);
+            repass.add(repas);
+            cursor.moveToNext();
+        }
+        // make sure to close the cursor
+        cursor.close();
+        return repass;
+    }
+
+    public List<Repas> getRepas(Bebe bebe) {
+        List<Repas> repass = new ArrayList<Repas>();
+        Repas repas;
+
+        whereArgs = new String[]{"" + bebe.getId()};
+
+        Cursor cursor = database.query(MySQLiteHelper.TABLE_REPAS,
+                allColumnsRepas, MySQLiteHelper.COLUMN_REF_BEBE + "=?", whereArgs, null, null, null);
+
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+            repas = cursorToRepas(cursor);
+            repass.add(repas);
+            cursor.moveToNext();
+        }
+        // make sure to close the cursor
+        cursor.close();
+        return repass;
+    }
+
+    public List<Repas> getRepas(Bebe bebe, Date date) {
+        List<Repas> repass = new ArrayList<Repas>();
+        Repas repas;
+
+        whereArgs = new String[]{"" + bebe.getId(), format_date.format(date)};
+
+        Cursor cursor = database.query(MySQLiteHelper.TABLE_REPAS,
+                allColumnsRepas, MySQLiteHelper.COLUMN_REF_BEBE + "=? and " +
+                        MySQLiteHelper.COLUMN_DATE + " =?", whereArgs, null, null, null);
+
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+            repas = cursorToRepas(cursor);
+            repass.add(repas);
+            cursor.moveToNext();
+        }
+        // make sure to close the cursor
+        cursor.close();
+        return repass;
+    }
+
+    private Repas cursorToRepas(Cursor cursor){
+        Repas repas = new Repas();
+        repas.setId(cursor.getLong(0));
+        repas.setQuantite(cursor.getInt(1));
+        repas.setDuree(cursor.getInt(2));
+
+        try {
+            repas.setDate_heure(format_date_heure.parse(cursor.getString(3) + " " + cursor.getString(4)));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        repas.setRef_bebe(cursor.getLong(4));
+        return repas;
+    }
+
 }

@@ -6,9 +6,10 @@ package SqlLite;
 public class Bebe {
 
     private long id;
+    private long ref_utilisateur;
     private String prenom;
     private String nom;
-    private int age;
+    private long age;
     private double poids;
 
     public long getId() {
@@ -35,11 +36,11 @@ public class Bebe {
         this.nom = nom;
     }
 
-    public int getAge() {
+    public long getAge() {
         return age;
     }
 
-    public void setAge(int age) {
+    public void setAge(long age) {
         this.age = age;
     }
 
@@ -49,5 +50,13 @@ public class Bebe {
 
     public void setPoids(double poids) {
         this.poids = poids;
+    }
+
+    public long getRef_utilisateur() {
+        return ref_utilisateur;
+    }
+
+    public void setRef_utilisateur(long ref_utilisateur) {
+        this.ref_utilisateur = ref_utilisateur;
     }
 }

@@ -25,10 +25,11 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 
     public static final String TABLE_REPAS = "Repas";
     public static final String COLUMN_ID_REPAS = "_id_repas";
-    private static final String COLUMN_REF_BEBE = "Ref_bebe";
-    private static final String COLUMN_QUANTITE = "Quantite";
-    private static final String COLUMN_DATE_HEURE = "Date_heure";
-    private static final String COLUMN_DUREE = "Duree";
+    public static final String COLUMN_REF_BEBE = "Ref_bebe";
+    public static final String COLUMN_QUANTITE = "Quantite";
+    public static final String COLUMN_DATE = "Date";
+    public static final String COLUMN_HEURE = "Heure";
+    public static final String COLUMN_DUREE = "Duree";
 
     private static final String DATABASE_NAME = "apibib.db";
     private static final int DATABASE_VERSION = 10;
@@ -54,14 +55,15 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
             " create table "
             + TABLE_ALERTE + " ( " + COLUMN_ID_ALERTE
             + " integer primary key autoincrement, " +
-            COLUMN_DATE_HEURE + " text not null); " +
+            COLUMN_DATE + " text not null); " +
 
             " create table "
             + TABLE_REPAS + "(" + COLUMN_ID_REPAS
             + " integer primary key autoincrement, " +
             COLUMN_QUANTITE + " integer not null, " +
             COLUMN_DUREE + " integer not null, " +
-            COLUMN_DATE_HEURE + " text not null, " +
+            COLUMN_DATE + " text not null, " +
+            COLUMN_HEURE + " text not null, " +
             COLUMN_REF_BEBE + " integer not null, " +
             " FOREIGN KEY " + COLUMN_REF_BEBE +
             " REFERENCES " + TABLE_BEBE + " ( " + COLUMN_ID_BEBE + " ); ";

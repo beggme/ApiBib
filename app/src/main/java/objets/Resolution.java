@@ -34,39 +34,18 @@ public class Resolution implements Parcelable{
         this.width = width;
     }
 
-    //from implements Parcelable
-    //utile seulement si ma classe est héritée
     @Override
     public int describeContents() {
         return 0;
     }
 
-    //from implements Parcelable
-    // liste les données à parser
     @Override
     public void writeToParcel(Parcel dest, int flags) {
 
         dest.writeInt(height);
         dest.writeInt(width);
 
-
     }
-
-    //permet de parser ma classe
-    public static final Parcelable.Creator<Resolution> CREATOR = new Parcelable.Creator<Resolution>()
-    {
-        @Override
-        public Resolution createFromParcel(Parcel source)
-        {
-            return new Resolution(source);
-        }
-
-        @Override
-        public Resolution[] newArray(int size)
-        {
-            return new Resolution[size];
-        }
-    };
 
     //constructeur utilisé par Parcelable.creator
     public Resolution(Parcel in) {
