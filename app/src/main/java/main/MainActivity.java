@@ -12,19 +12,15 @@ import objets.Resolution;
 
 public class MainActivity extends ActionBarActivity {
 
-    final String RESOLUTION = "resolution";
-    Resolution resolution;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
 
+        Singleton singleton = Singleton.getInstance();
+
+        //Intent intent = new Intent(MainActivity.this, Login.class);
         Intent intent = new Intent(MainActivity.this, Login.class);
-
-        resolution = getResolution();
-
-        intent.putExtra(RESOLUTION, resolution);
 
         startActivity(intent);
 

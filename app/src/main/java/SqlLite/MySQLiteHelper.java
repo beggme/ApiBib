@@ -32,41 +32,37 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
     public static final String COLUMN_DUREE = "Duree";
 
     private static final String DATABASE_NAME = "apibib.db";
-    private static final int DATABASE_VERSION = 10;
+    private static final int DATABASE_VERSION = 14;
 
     // Database creation sql statement
-    private static final String DATABASE_CREATE = "create table "
+    private static final String DATABASE_CREATE_UTILISATEUR = "create table "
             + TABLE_UTILISATEURS + " ( " + COLUMN_ID_UTILISATEUR
             + " integer primary key autoincrement, " +
             COLUMN_LOGIN + " text not null, " +
-            COLUMN_MDP + " text not null);" +
+            COLUMN_MDP + " text not null);";
 
-            "create table "
+    private static final String DATABASE_CREATE_BEBE="create table "
             + TABLE_BEBE + " ( " + COLUMN_ID_BEBE
             + " integer primary key autoincrement, " +
             COLUMN_NOM + " text not null, " +
             COLUMN_PRENOM + " text not null, " +
             COLUMN_AGE + " integer not null, " +
             COLUMN_POIDS + " real not null, " +
-            COLUMN_REF_UTILISATEUR + " integer not null, " +
-            "FOREIGN KEY " + COLUMN_REF_UTILISATEUR +
-            " REFERENCES " + TABLE_UTILISATEURS + " ( " + COLUMN_ID_UTILISATEUR + " );" +
+            COLUMN_REF_UTILISATEUR + " integer not null);";
 
-            " create table "
+    private static final String DATABASE_CREATE_ALERTE = " create table "
             + TABLE_ALERTE + " ( " + COLUMN_ID_ALERTE
             + " integer primary key autoincrement, " +
-            COLUMN_DATE + " text not null); " +
+            COLUMN_DATE + " text not null);";
 
-            " create table "
+    private static final String DATABASE_CREATE_REPAS = "create table "
             + TABLE_REPAS + "(" + COLUMN_ID_REPAS
             + " integer primary key autoincrement, " +
             COLUMN_QUANTITE + " integer not null, " +
             COLUMN_DUREE + " integer not null, " +
             COLUMN_DATE + " text not null, " +
             COLUMN_HEURE + " text not null, " +
-            COLUMN_REF_BEBE + " integer not null, " +
-            " FOREIGN KEY " + COLUMN_REF_BEBE +
-            " REFERENCES " + TABLE_BEBE + " ( " + COLUMN_ID_BEBE + " ); ";
+            COLUMN_REF_BEBE + " integer not null);";
 
     public MySQLiteHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -74,7 +70,12 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase database) {
-        database.execSQL(DATABASE_CREATE);
+
+        database.execSQL(DATABASE_CREATE_UTILISATEUR);
+        database.execSQL(DATABASE_CREATE_BEBE);
+        database.execSQL(DATABASE_CREATE_REPAS);
+        database.execSQL(DATABASE_CREATE_ALERTE);
+
     }
 
     @Override

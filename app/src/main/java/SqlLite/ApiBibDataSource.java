@@ -122,17 +122,17 @@ public class ApiBibDataSource {
         return utilisateur;
     }
 
-    public Bebe createBebe(int ref_utilisateur, String nom, String prenom, long age, double poids) {
+    public Bebe createBebe(long ref_utilisateur, String nom, String prenom, long age, double poids) {
         ContentValues values = new ContentValues();
         values.put(MySQLiteHelper.COLUMN_REF_UTILISATEUR, ref_utilisateur);
         values.put(MySQLiteHelper.COLUMN_NOM, nom);
         values.put(MySQLiteHelper.COLUMN_PRENOM, prenom);
         values.put(MySQLiteHelper.COLUMN_AGE, age);
         values.put(MySQLiteHelper.COLUMN_POIDS, poids);
-        long insertId = database.insert(MySQLiteHelper.TABLE_UTILISATEURS, null,
+        long insertId = database.insert(MySQLiteHelper.TABLE_BEBE, null,
                 values);
-        Cursor cursor = database.query(MySQLiteHelper.TABLE_UTILISATEURS,
-                allColumnsUtilisateur, MySQLiteHelper.COLUMN_ID_UTILISATEUR + " = " + insertId, null,
+        Cursor cursor = database.query(MySQLiteHelper.TABLE_BEBE,
+                allColumnsBebe, MySQLiteHelper.COLUMN_REF_UTILISATEUR + " = " + insertId, null,
                 null, null, null, null);
         cursor.moveToFirst();
         Bebe newBebe = cursorToBebe(cursor);
@@ -175,8 +175,8 @@ public class ApiBibDataSource {
 
         whereArgs = new String[]{"" + utilisateur.getId()};
 
-        Cursor cursor = database.query(MySQLiteHelper.TABLE_UTILISATEURS,
-                allColumnsUtilisateur, MySQLiteHelper.COLUMN_REF_UTILISATEUR + "=?", whereArgs, null, null, null);
+        Cursor cursor = database.query(MySQLiteHelper.TABLE_BEBE,
+                allColumnsBebe, MySQLiteHelper.COLUMN_REF_UTILISATEUR + "=?", whereArgs, null, null, null);
 
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {

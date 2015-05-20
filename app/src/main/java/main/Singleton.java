@@ -7,19 +7,19 @@ import objets.Resolution;
 /**
  * Created by mehdibeggas on 17/05/2015.
  */
-public class VariablesGenerales {
+public class Singleton {
 
-    private static VariablesGenerales instance;
+    private static Singleton instance;
     private Resolution resolution;
     private Utilisateur utilisateur;
     private Bebe bebe;
 
-    private VariablesGenerales(){
+    private Singleton(){
     }
 
-    public static VariablesGenerales getInstance(){
+    public static Singleton getInstance(){
         if (instance==null)
-            instance=new VariablesGenerales();
+            instance=new Singleton();
         return instance;
     }
 
