@@ -2,7 +2,7 @@ package activity;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.widget.EditText;
+import android.widget.TextView;
 
 import com.example.mehdibeggas.apibib_apresreunion.R;
 
@@ -24,7 +24,7 @@ public class Test extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_parametres_initiaux);
 
         DateFormat format_date_heure = new SimpleDateFormat("HH:mm dd-MM-yyyy");
 
@@ -49,11 +49,16 @@ public class Test extends Activity {
                 10, 11.3));
         repas = dataSource.createRepas(120, 20, date, singleton.getBebe().getId());
 
-        List<Repas> repass = dataSource.getRepas(singleton.getBebe());
+        try {
+            date = format_date_heure.parse("10:30 15-05-2015");
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        List<Repas> repass = dataSource.getRepas(singleton.getBebe(), date);
 
         dataSource.close();
 
-        EditText login = (EditText) findViewById(R.id.login);
+        TextView login = (TextView) findViewById(R.id.test);
 
         login.setText(repass.get(0).getDuree() + "");
 

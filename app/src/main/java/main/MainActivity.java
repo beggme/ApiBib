@@ -18,6 +18,7 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
 
         Singleton singleton = Singleton.getInstance();
+        singleton.setResolution(getResolution());
 
         //Intent intent = new Intent(MainActivity.this, Login.class);
         Intent intent = new Intent(MainActivity.this, Login.class);
