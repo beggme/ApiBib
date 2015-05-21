@@ -24,37 +24,47 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_marginTop="30dp"
+        >
         <EditText
-            android:layout_width="250dp"
+            android:layout_width="242dp"
             android:layout_height="wrap_content"
             android:hint="Login"
             android:layout_gravity="left"
             android:id="@+id/login"
-            android:inputType="textEmailAddress"/>
+            android:inputType="textEmailAddress"
+            android:drawableLeft="@drawable/profil"
+            android:background="#FFFFFF"/>
 
         <EditText
-            android:layout_width="250dp"
+            android:layout_width="242dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
             android:hint="Mot de passe"
             android:inputType="textPassword"
             android:id="@+id/mdp"
-            android:layout_gravity="left"/>
+            android:layout_gravity="left"
+            android:drawableLeft="@drawable/log"
+            android:background="#FFFFFF"/>
     </LinearLayout>
+
 
     <Button
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:text="Connexion"
         android:onClick="connexion"
-        android:layout_gravity="center"/>
+        android:layout_gravity="center"
+        android:layout_marginTop="15dp"
+        />
 
     <com.facebook.login.widget.LoginButton xmlns:fb="http://schemas.android.com/apk/res-auto"
         android:id="@+id/fb_login_button"
         android:layout_width="242dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="20dp"
         android:layout_marginBottom="30dp"
         style="@style/FacebookLoginButton"
         fb:login_text="@string/connect_with_facebook" />
