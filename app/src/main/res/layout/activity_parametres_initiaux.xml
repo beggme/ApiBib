@@ -28,34 +28,33 @@
             android:text="Paramètres"/>
 
         <EditText
+            android:id="@+id/nomBebe"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="Nom"/>
 
         <EditText
+            android:id="@+id/prenomBebe"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="Prenom"/>
 
         <EditText
+            android:id="@+id/dateNaissance"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="Date de naissance"/>
 
         <EditText
+            android:id="@+id/poids"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="Poids"/>
 
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="Photo"/>
 
     </LinearLayout>
 

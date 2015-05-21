@@ -22,17 +22,19 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 
     public static final String TABLE_ALERTE = "Alerte";
     public static final String COLUMN_ID_ALERTE = "_id_alerte";
+    public static final String COLUMN_DATE_ALERTE = "Date";
+    public static final String COLUMN_HEURE_ALERTE = "Heure";
 
     public static final String TABLE_REPAS = "Repas";
     public static final String COLUMN_ID_REPAS = "_id_repas";
     public static final String COLUMN_REF_BEBE = "Ref_bebe";
     public static final String COLUMN_QUANTITE = "Quantite";
-    public static final String COLUMN_DATE = "Date";
-    public static final String COLUMN_HEURE = "Heure";
+    public static final String COLUMN_DATE_REPAS = "Date";
+    public static final String COLUMN_HEURE_REPAS = "Heure";
     public static final String COLUMN_DUREE = "Duree";
 
     private static final String DATABASE_NAME = "apibib.db";
-    private static final int DATABASE_VERSION = 14;
+    private static final int DATABASE_VERSION = 15;
 
     // Database creation sql statement
     private static final String DATABASE_CREATE_UTILISATEUR = "create table "
@@ -53,15 +55,17 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
     private static final String DATABASE_CREATE_ALERTE = " create table "
             + TABLE_ALERTE + " ( " + COLUMN_ID_ALERTE
             + " integer primary key autoincrement, " +
-            COLUMN_DATE + " text not null);";
+            COLUMN_REF_BEBE + " integer not null, " +
+            COLUMN_DATE_ALERTE + " text not null, " +
+            COLUMN_HEURE_ALERTE + " text not null);";
 
     private static final String DATABASE_CREATE_REPAS = "create table "
             + TABLE_REPAS + "(" + COLUMN_ID_REPAS
             + " integer primary key autoincrement, " +
             COLUMN_QUANTITE + " integer not null, " +
             COLUMN_DUREE + " integer not null, " +
-            COLUMN_DATE + " text not null, " +
-            COLUMN_HEURE + " text not null, " +
+            COLUMN_DATE_REPAS + " text not null, " +
+            COLUMN_HEURE_REPAS + " text not null, " +
             COLUMN_REF_BEBE + " integer not null);";
 
     public MySQLiteHelper(Context context) {
