@@ -321,4 +321,104 @@ public class ApiBibDataSource {
         repas.setRef_bebe(cursor.getLong(4));
         return repas;
     }
+
+    public Alerte createAlerte(long ref_bebe, Date date_heure) {
+        ContentValues values = new ContentValues();
+        values.put(MySQLiteHelper.COLUMN_REF_BEBE, ref_bebe);
+        values.put(MySQLiteHelper.COLUMN_DATE_ALERTE, format_date.format(date_heure));
+        values.put(MySQLiteHelper.COLUMN_HEURE_ALERTE, format_heure.format(date_heure));
+        long insertId = database.insert(MySQLiteHelper.TABLE_ALERTE, null,
+                values);
+        Cursor cursor = database.query(MySQLiteHelper.TABLE_ALERTE,
+                allColumnsAlerte, MySQLiteHelper.COLUMN_ID_ALERTE + " = " + insertId, null,
+                null, null, null, null);
+        cursor.moveToFirst();
+        Alerte newAlerte = cursorToAlerte(cursor);
+        cursor.close();
+        return newAlerte;
+    }
+
+    public void deleteAlerte(Alerte alerte) {
+        long id = alerte.getId();
+        System.out.println("Alerte deleted with id: " + id);
+        database.delete(MySQLiteHelper.TABLE_ALERTE, MySQLiteHelper.COLUMN_ID_ALERTE
+                + " = " + id, null);
+    }
+
+    public void deleteAllAlerte() {
+        database.delete(MySQLiteHelper.TABLE_ALERTE, null, null);
+    }
+
+    public List<Alerte> getAlerte() {
+        List<Alerte> alertes = new ArrayList<Alerte>();
+        Alerte alerte;
+
+        Cursor cursor = database.query(MySQLiteHelper.TABLE_ALERTE,
+                allColumnsAlerte, null, null, null, null, null);
+
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+            alerte = cursorToAlerte(cursor);
+            alertes.add(alerte);
+            cursor.moveToNext();
+        }
+        // make sure to close the cursor
+        cursor.close();
+        return alertes;
+    }
+
+    public List<Alerte> getAlerte(Bebe bebe) {
+        List<Alerte> alertes = new ArrayList<Alerte>();
+        Alerte alerte;
+
+        whereArgs = new String[]{"" + bebe.getId()};
+
+        Cursor cursor = database.query(MySQLiteHelper.TABLE_ALERTE,
+                allColumnsAlerte, MySQLiteHelper.COLUMN_REF_BEBE + "=?", whereArgs, null, null, null);
+
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+            alerte = cursorToAlerte(cursor);
+            alertes.add(alerte);
+            cursor.moveToNext();
+        }
+        // make sure to close the cursor
+        cursor.close();
+        return alertes;
+    }
+
+    public List<Alerte> getAlerte(Bebe bebe, Date date) {
+        List<Alerte> alertes = new ArrayList<Alerte>();
+        Alerte alerte;
+
+        whereArgs = new String[]{"" + bebe.getId(), format_date.format(date)};
+
+        Cursor cursor = database.query(MySQLiteHelper.TABLE_ALERTE,
+                allColumnsAlerte, MySQLiteHelper.COLUMN_REF_BEBE + "=? and " +
+                        MySQLiteHelper.COLUMN_DATE_ALERTE + " =?", whereArgs, null, null, null);
+
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+            alerte = cursorToAlerte(cursor);
+            alertes.add(alerte);
+            cursor.moveToNext();
+        }
+        // make sure to close the cursor
+        cursor.close();
+        return alertes;
+    }
+
+    private Alerte cursorToAlerte(Cursor cursor){
+        Alerte alerte = new Alerte();
+        alerte.setId(cursor.getLong(0));
+        alerte.setRef_bebe(cursor.getLong(1));
+
+        try {
+            alerte.setDate_heure(format_date_heure.parse(cursor.getString(2) + " " + cursor.getString(3)));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        return alerte;
+    }
 }
