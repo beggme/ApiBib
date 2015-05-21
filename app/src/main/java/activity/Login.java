@@ -66,6 +66,8 @@ public class Login extends Activity{
                 // TODO Afficher message erreur
             }
         });
+
+        dataSource.close();
     }
 
     public boolean connexion(View v){
