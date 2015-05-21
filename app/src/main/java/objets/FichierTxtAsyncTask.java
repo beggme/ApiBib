@@ -74,11 +74,24 @@ public class FichierTxtAsyncTask extends AsyncTask<String, String,  List<String>
     protected void onPostExecute( List<String> s) {
         super.onPostExecute(s);
 
+        double quantiteInitiale = Double.parseDouble(s.get(0).replace("g",""));
+        double quantiteRestante = Double.parseDouble(s.get(1).replace("g",""));
+
+        if(quantiteRestante<0){
+            quantiteRestante = 0;
+        }
+
         TextView textView = (TextView) activity.findViewById(R.id.quInitiale);
-        textView.setText("Quantité initiale : " + s.get(0).replace("g","mL"));
+        textView.setText("Quantité initiale : " + quantiteInitiale + " mL");
 
         textView = (TextView) activity.findViewById(R.id.quBue);
-        textView.setText("Quantité bue : " + s.get(1).replace("g","mL"));
+        textView.setText("Quantité bue : " + (quantiteInitiale - quantiteRestante) + " mL");
+
+        int minutes = (Integer.parseInt(s.get(2))/1000)/60;
+        int secondes = (Integer.parseInt(s.get(2))/1000) % 60;
+
+        textView = (TextView) activity.findViewById(R.id.duree);
+        textView.setText("Durée : " + minutes + " minutes " + secondes + " secondes");
 
         Log.e(this.getClass().getPackage().toString(), "Valeur de s : " + s);
 
