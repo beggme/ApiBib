@@ -143,6 +143,21 @@ public class ApiBibDataSource {
         return newBebe;
     }
 
+    public Bebe modifBebe(Bebe bebe) {
+
+        long idBebe = bebe.getId();
+
+        ContentValues values = new ContentValues();
+        values.put(MySQLiteHelper.COLUMN_NOM, bebe.getNom());
+        values.put(MySQLiteHelper.COLUMN_PRENOM, bebe.getPrenom());
+        values.put(MySQLiteHelper.COLUMN_AGE, bebe.getAge());
+        values.put(MySQLiteHelper.COLUMN_POIDS, bebe.getPoids());
+
+        database.update(MySQLiteHelper.TABLE_BEBE, values, MySQLiteHelper.COLUMN_ID_BEBE + "=?", new String[]{"idBebe"});
+
+        return bebe;
+    }
+
     public void deleteBebe(Bebe bebe) {
         long id = bebe.getId();
         System.out.println("Comment deleted with id: " + id);
