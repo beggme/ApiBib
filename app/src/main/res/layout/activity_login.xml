@@ -5,7 +5,15 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
-    android:background="#75B98A">
+    android:background="#75B98A"
+    android:weightSum="1">
+
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:id="@+id/initBDD"
+        android:onClick="initialiserBDD"/>
 
     <ImageView
         android:layout_width="fill_parent"
