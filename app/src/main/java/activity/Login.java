@@ -66,8 +66,6 @@ public class Login extends Activity{
                 // TODO Afficher message erreur
             }
         });
-
-        dataSource.close();
     }
 
     public boolean connexion(View v){
@@ -94,6 +92,7 @@ public class Login extends Activity{
                     singleton.setBebe(dataSource.getBebe(utilisateur).get(0));
 
                     intent = new Intent(this, Indicateurs.class);
+                    dataSource.close();
                     startActivity(intent);
                 }
                 else{
@@ -123,10 +122,8 @@ public class Login extends Activity{
                 });
                 alertDialog.show();
             }
-
         }
         return false;
-
     }
 
     public void initialiserBDD(View v){

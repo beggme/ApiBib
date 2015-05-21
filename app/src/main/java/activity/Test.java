@@ -54,13 +54,13 @@ public class Test extends Activity {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        List<Repas> repass = dataSource.getRepas(singleton.getBebe(), date);
+        List<Repas> listeRepas = dataSource.getRepas(singleton.getBebe(), date);
 
         dataSource.close();
 
         TextView login = (TextView) findViewById(R.id.test);
 
-        login.setText(repass.get(0).getDuree() + "");
+        login.setText(listeRepas.get(0).getDuree() + "");
 
     }
 

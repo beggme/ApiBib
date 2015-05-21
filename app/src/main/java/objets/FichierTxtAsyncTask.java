@@ -18,7 +18,12 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URI;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+
+import SqlLite.ApiBibDataSource;
+import SqlLite.Repas;
+import main.Singleton;
 
 /**
  * Created by kevinbettencourt on 03/04/2015.
@@ -27,9 +32,12 @@ public class FichierTxtAsyncTask extends AsyncTask<String, String,  List<String>
 
     public Activity activity;
     public static final String LOG_TAG = "HttpGet";
+    ApiBibDataSource apiBibDataSource;
+    Singleton singleton = Singleton.getInstance();
 
-    public FichierTxtAsyncTask(Activity activity) {
+    public FichierTxtAsyncTask(Activity activity,ApiBibDataSource apiBibDataSource) {
         this.activity = activity;
+        this.apiBibDataSource = apiBibDataSource;
     }
 
     @Override
@@ -74,6 +82,7 @@ public class FichierTxtAsyncTask extends AsyncTask<String, String,  List<String>
     protected void onPostExecute( List<String> s) {
         super.onPostExecute(s);
 
+        Date datePriseBiberon = new Date();
         double quantiteInitiale = Double.parseDouble(s.get(0).replace("g",""));
         double quantiteRestante = Double.parseDouble(s.get(1).replace("g",""));
 
@@ -81,17 +90,25 @@ public class FichierTxtAsyncTask extends AsyncTask<String, String,  List<String>
             quantiteRestante = 0;
         }
 
+        double quantiteBue = quantiteInitiale - quantiteRestante;
+
+
+
         TextView textView = (TextView) activity.findViewById(R.id.quInitiale);
         textView.setText("Quantité initiale : " + quantiteInitiale + " mL");
 
         textView = (TextView) activity.findViewById(R.id.quBue);
-        textView.setText("Quantité bue : " + (quantiteInitiale - quantiteRestante) + " mL");
+        textView.setText("Quantité bue : " + quantiteBue + " mL");
 
         int minutes = (Integer.parseInt(s.get(2))/1000)/60;
         int secondes = (Integer.parseInt(s.get(2))/1000) % 60;
 
         textView = (TextView) activity.findViewById(R.id.duree);
         textView.setText("Durée : " + minutes + " minutes " + secondes + " secondes");
+
+        long duree = (minutes * 60) + secondes;
+        Repas nouveauRepas = apiBibDataSource.createRepas(new Double(quantiteBue).longValue(),
+                duree, datePriseBiberon,singleton.getBebe().getId());
 
         Log.e(this.getClass().getPackage().toString(), "Valeur de s : " + s);
 
