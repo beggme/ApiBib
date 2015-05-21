@@ -1,5 +1,7 @@
 package main;
 
+import android.os.CountDownTimer;
+
 import SqlLite.Bebe;
 import SqlLite.Utilisateur;
 import objets.Resolution;
@@ -13,13 +15,16 @@ public class Singleton {
     private Resolution resolution;
     private Utilisateur utilisateur;
     private Bebe bebe;
-
+    private ApiBibCountDownTimer timerCount;
+    private boolean timerHasStarted;
+    private long timeRemain;
     private Singleton(){
     }
 
     public static Singleton getInstance(){
         if (instance==null)
             instance=new Singleton();
+
         return instance;
     }
 
@@ -45,5 +50,30 @@ public class Singleton {
 
     public void setBebe(Bebe bebe) {
         this.bebe = bebe;
+    }
+
+
+    public ApiBibCountDownTimer getTimerCount() {
+        return timerCount;
+    }
+
+    public void setTimerCount(ApiBibCountDownTimer timerCount) {
+        this.timerCount = timerCount;
+    }
+
+    public boolean IsTimerHasStarted() {
+        return timerHasStarted;
+    }
+
+    public void setTimerHasStarted(boolean timerHasStarted) {
+        this.timerHasStarted = timerHasStarted;
+    }
+
+    public long getTimeRemain() {
+        return timeRemain;
+    }
+
+    public void setTimeRemain(long timeRemain) {
+        this.timeRemain = timeRemain;
     }
 }
