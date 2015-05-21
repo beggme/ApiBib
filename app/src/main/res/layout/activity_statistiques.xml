@@ -18,16 +18,19 @@
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:text="Jour"
                 android:id="@+id/bt_fragmentGraphiqueJour"/>
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:text="Semaine"
                 android:id="@+id/bt_fragmentGraphiqueSemaine"/>
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:text="Mois"
                 android:id="@+id/bt_fragmentGraphiqueMois"/>
         </LinearLayout>
@@ -35,7 +38,8 @@
             android:id="@+id/container_fragment"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:layout_gravity="center_horizontal">
+            android:layout_gravity="center_horizontal"
+            android:background="#ffffff">
         </FrameLayout>
     </LinearLayout>
 

@@ -122,10 +122,8 @@ public class Login extends Activity{
                 });
                 alertDialog.show();
             }
-
         }
         return false;
-
     }
 
     public void initialiserBDD(View v){

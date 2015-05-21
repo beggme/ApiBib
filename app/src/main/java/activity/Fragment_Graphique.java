@@ -94,19 +94,20 @@ public class Fragment_Graphique extends Fragment{
 
             ArrayList<String> labels = new ArrayList<String>();
 
+            int i = 0;
+            Calendar dateDuJour = Calendar.getInstance();
+
             switch (typeGraphique){
                 // Graphique journée : affiche les quantités bues par tranche de x heures
                 // (en fonction du délai choisi par l'utilisateur)
                 case 1:
+                    labels = new ArrayList<String>();
                     /*
                     labels.add("00h");
                     for (int heure = 1; heure<24; heure++){
                         labels.add(Integer.toString(heure) + "h");
                     }
                     */
-                    int i = 0;
-                    Calendar dateDuJour = Calendar.getInstance();
-
                     for(Repas repas : listeRepas){
                         dateDuJour.setTime(repas.getDate_heure());
                         entries.add(new BarEntry(repas.getQuantite(),i));
@@ -116,6 +117,8 @@ public class Fragment_Graphique extends Fragment{
 
                     break;
                 case 2:
+                    labels = new ArrayList<String>();
+                    /*
                     labels.add("Lundi");
                     labels.add("Mardi");
                     labels.add("Mercredi");
@@ -123,21 +126,35 @@ public class Fragment_Graphique extends Fragment{
                     labels.add("Vendredi");
                     labels.add("Samedi");
                     labels.add("Dimanche");
+                    */
+                    String jourSemaine = "";
+
+                    for(Repas repas : listeRepas){
+                        dateDuJour.setTime(repas.getDate_heure());
+                        entries.add(new BarEntry(repas.getQuantite(),i));
+
+                        jourSemaine = determinerJourSemaine(dateDuJour.get(Calendar.DAY_OF_WEEK));
+                        labels.add(jourSemaine);
+
+                        i++;
+                    }
 
                     break;
                 case 3:
-                    labels.add("Janvier");
-                    labels.add("Février");
-                    labels.add("Mars");
-                    labels.add("Avril");
-                    labels.add("Mai");
-                    labels.add("Juin");
-                    labels.add("Juillet");
-                    labels.add("Août");
-                    labels.add("Septembre");
-                    labels.add("Octobre");
-                    labels.add("Novembre");
-                    labels.add("Décembre");
+                    labels = new ArrayList<String>();
+
+                    String moisAnnee = "";
+
+                    for(Repas repas : listeRepas){
+                        dateDuJour.setTime(repas.getDate_heure());
+                        entries.add(new BarEntry(repas.getQuantite(),i));
+
+                        moisAnnee = determinerMoisAnnee(dateDuJour.get(Calendar.MONTH));
+                        labels.add(moisAnnee);
+
+                        i++;
+                    }
+
                     break;
             }
 
@@ -166,10 +183,68 @@ public class Fragment_Graphique extends Fragment{
             chart.setScaleXEnabled(false);
             chart.setScaleYEnabled(false);
             chart.animateXY(1000,1000);
+            chart.setDescription("");
+            chart.setDrawBorders(true);
+            //chart.setBorderColor(#ffffff);
+
         }
         else{
             System.out.println("Aucune quantité dispo");
         }
+    }
+
+    private String determinerMoisAnnee(int i) {
+        switch (i){
+            case 1:
+                return "Janvier";
+            case 2:
+                return "Février";
+            case 3:
+                return "Mars";
+            case 4:
+                return "Avril";
+            case 5:
+                return "Mai";
+            case 6:
+                return "Juin";
+            case 7:
+                return "Juillet";
+            case 8:
+                return "Août";
+            case 9:
+                return "Septembre";
+            case 10:
+                return "Octobre";
+            case 11:
+                return "Novembre";
+            case 12:
+                return "Décembre";
+            default:
+                break;
+        }
+        return null;
+    }
+
+    private String determinerJourSemaine(int i) {
+        switch (i){
+            case 1:
+                return "Dimanche";
+            case 2:
+                return "Lundi";
+            case 3:
+                return "Mardi";
+            case 4:
+                return "Mercredi";
+            case 5:
+                return "Jeudi";
+            case 6:
+                return "Vendredi";
+            case 7:
+                return "Samedi";
+            default:
+                break;
+        }
+        return null;
     }
 
     @Override
