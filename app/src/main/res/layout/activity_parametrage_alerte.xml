@@ -20,58 +20,62 @@
             android:src="@drawable/apibib_logo_vert"
             android:layout_gravity="center_horizontal" />
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textSize="20dp"
+            android:text="ALERTES"
+            android:layout_marginBottom="20dp"
+            android:id="@+id/alert" />
+
+        <TextView
+            android:id="@+id/toute"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Toutes les"
+            android:layout_gravity="center"
+            android:layout_marginBottom="21dp" />
+
         <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="124dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_weight="0.32">
-            <LinearLayout
-                android:layout_width="254dp"
-                android:layout_height="231dp"
-                android:orientation="vertical"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginBottom="40dp">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:textSize="20dp"
-                    android:text="ALERTES"
-                    android:layout_marginBottom="20dp"
-                    android:id="@+id/alert" />
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="center_horizontal">
 
-                <TextView
-                    android:id="@+id/toute"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Toutes les"
-                    android:layout_gravity="center"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:id="@+id/timeRemain"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="30dp"
-                    android:layout_marginBottom="30dp"
-                    android:text="03 h 00 m 00 s" />
-
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Start"
-                    android:layout_gravity="center_horizontal"
-                    android:id="@+id/startTimer" />
-
-            </LinearLayout>
-
-            <!--<ImageView
+            <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/imageView"
-                android:src="@drawable/biberon" />-->
+                android:layout_height="36dp"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:id="@+id/timeRemain"
+                android:layout_marginBottom="30dp"
+                android:text="03 h 00 m 00 s"
+                android:layout_marginTop="20dp" />
+
+            <Button
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:text="+"
+                android:id="@+id/modifTimer"
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="15dp" />
+
+            <Button
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:text="X"
+                android:id="@+id/sup"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="15dp" />
+
         </LinearLayout>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Start"
+            android:layout_gravity="center_horizontal"
+            android:id="@+id/startTimer" />
 
     </LinearLayout>
 
