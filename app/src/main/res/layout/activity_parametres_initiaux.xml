@@ -20,7 +20,6 @@
             android:src="@drawable/apibib_logo_vert"/>
 
         <TextView
-            android:id="@+id/test"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -32,28 +31,40 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="Nom"/>
+            android:inputType="textEmailAddress"
+            android:hint="Nom"/>
 
         <EditText
             android:id="@+id/prenomBebe"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="Prenom"/>
+            android:inputType="textEmailAddress"
+            android:hint="Prenom"/>
 
         <EditText
-            android:id="@+id/dateNaissance"
+            android:id="@+id/age"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="Date de naissance"/>
+            android:inputType="number"
+            android:hint="Age (en mois)"/>
 
         <EditText
             android:id="@+id/poids"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="Poids"/>
+            android:inputType="numberDecimal"
+            android:hint="Poids"/>
+
+        <Button
+            android:id="@+id/ajoutModifBebe"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Ajouter"
+            android:onClick="ajoutModifBebe"/>
 
 
     </LinearLayout>

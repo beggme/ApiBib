@@ -2,7 +2,6 @@ package activity;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.widget.TextView;
 
 import com.example.mehdibeggas.apibib_apresreunion.R;
 
@@ -57,10 +56,6 @@ public class Test extends Activity {
         List<Repas> listeRepas = dataSource.getRepas(singleton.getBebe(), date);
 
         dataSource.close();
-
-        TextView login = (TextView) findViewById(R.id.test);
-
-        login.setText(listeRepas.get(0).getDuree() + "");
 
     }
 
