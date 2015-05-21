@@ -24,7 +24,7 @@ public class ApiBibDataSource {
     private MySQLiteHelper dbHelper;
     private String[] whereArgs;
 
-    DateFormat format_date_heure = new SimpleDateFormat("HH:mm dd-MM-yyyy");
+    DateFormat format_date_heure = new SimpleDateFormat("dd-MM-yyyy HH:mm");
     DateFormat format_date = new SimpleDateFormat("dd-MM-yyyy");
     DateFormat format_heure = new SimpleDateFormat("HH:mm");
 
@@ -35,9 +35,12 @@ public class ApiBibDataSource {
             MySQLiteHelper.COLUMN_NOM, MySQLiteHelper.COLUMN_PRENOM, MySQLiteHelper.COLUMN_AGE,
             MySQLiteHelper.COLUMN_POIDS, MySQLiteHelper.COLUMN_REF_UTILISATEUR};
 
+    private String[] allColumnsAlerte = { MySQLiteHelper.COLUMN_ID_ALERTE,
+            MySQLiteHelper.COLUMN_REF_BEBE, MySQLiteHelper.COLUMN_DATE_ALERTE, MySQLiteHelper.COLUMN_HEURE_ALERTE};
+
     private String[] allColumnsRepas = { MySQLiteHelper.COLUMN_ID_REPAS,
             MySQLiteHelper.COLUMN_QUANTITE, MySQLiteHelper.COLUMN_DUREE,
-            MySQLiteHelper.COLUMN_DATE, MySQLiteHelper.COLUMN_HEURE, MySQLiteHelper.COLUMN_REF_BEBE};
+            MySQLiteHelper.COLUMN_DATE_REPAS, MySQLiteHelper.COLUMN_HEURE_REPAS, MySQLiteHelper.COLUMN_REF_BEBE};
 
     public ApiBibDataSource(Context context) {
         dbHelper = new MySQLiteHelper(context);
@@ -140,6 +143,21 @@ public class ApiBibDataSource {
         return newBebe;
     }
 
+    public Bebe modifBebe(Bebe bebe) {
+
+        long idBebe = bebe.getId();
+
+        ContentValues values = new ContentValues();
+        values.put(MySQLiteHelper.COLUMN_NOM, bebe.getNom());
+        values.put(MySQLiteHelper.COLUMN_PRENOM, bebe.getPrenom());
+        values.put(MySQLiteHelper.COLUMN_AGE, bebe.getAge());
+        values.put(MySQLiteHelper.COLUMN_POIDS, bebe.getPoids());
+
+        database.update(MySQLiteHelper.TABLE_BEBE, values, MySQLiteHelper.COLUMN_ID_BEBE + "=?", new String[]{"idBebe"});
+
+        return bebe;
+    }
+
     public void deleteBebe(Bebe bebe) {
         long id = bebe.getId();
         System.out.println("Comment deleted with id: " + id);
@@ -205,8 +223,8 @@ public class ApiBibDataSource {
         values.put(MySQLiteHelper.COLUMN_REF_BEBE, ref_bebe);
         values.put(MySQLiteHelper.COLUMN_QUANTITE, quantite);
         values.put(MySQLiteHelper.COLUMN_DUREE, duree);
-        values.put(MySQLiteHelper.COLUMN_DATE, format_date.format(date_heure));
-        values.put(MySQLiteHelper.COLUMN_HEURE, format_heure.format(date_heure));
+        values.put(MySQLiteHelper.COLUMN_DATE_REPAS, format_date.format(date_heure));
+        values.put(MySQLiteHelper.COLUMN_HEURE_REPAS, format_heure.format(date_heure));
         long insertId = database.insert(MySQLiteHelper.TABLE_REPAS, null,
                 values);
         Cursor cursor = database.query(MySQLiteHelper.TABLE_REPAS,
@@ -275,7 +293,7 @@ public class ApiBibDataSource {
 
         Cursor cursor = database.query(MySQLiteHelper.TABLE_REPAS,
                 allColumnsRepas, MySQLiteHelper.COLUMN_REF_BEBE + "=? and " +
-                        MySQLiteHelper.COLUMN_DATE + " =?", whereArgs, null, null, null);
+                        MySQLiteHelper.COLUMN_DATE_REPAS + " =?", whereArgs, null, null, null);
 
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
@@ -303,5 +321,4 @@ public class ApiBibDataSource {
         repas.setRef_bebe(cursor.getLong(4));
         return repas;
     }
-
 }
