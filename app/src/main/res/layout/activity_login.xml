@@ -49,15 +49,29 @@
             android:background="#FFFFFF"/>
     </LinearLayout>
 
-
-    <Button
+    <LinearLayout
         android:layout_width="250dp"
         android:layout_height="wrap_content"
-        android:text="Connexion"
-        android:onClick="connexion"
-        android:layout_gravity="center"
-        android:layout_marginTop="15dp"
-        />
+        android:layout_marginTop="15dp">
+
+        <Button
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:text="Connexion"
+            android:onClick="connexion"
+            android:layout_gravity="center"
+            />
+
+        <Button
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:text="Nouveau"
+            android:onClick="enregistrementUtilisateur"
+            android:layout_gravity="center"
+            android:layout_marginLeft="10dp"
+            />
+
+    </LinearLayout>
 
     <com.facebook.login.widget.LoginButton xmlns:fb="http://schemas.android.com/apk/res-auto"
         android:id="@+id/fb_login_button"

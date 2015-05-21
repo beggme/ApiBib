@@ -135,7 +135,7 @@ public class ApiBibDataSource {
         long insertId = database.insert(MySQLiteHelper.TABLE_BEBE, null,
                 values);
         Cursor cursor = database.query(MySQLiteHelper.TABLE_BEBE,
-                allColumnsBebe, MySQLiteHelper.COLUMN_REF_UTILISATEUR + " = " + insertId, null,
+                allColumnsBebe, MySQLiteHelper.COLUMN_ID_BEBE + " = " + insertId, null,
                 null, null, null, null);
         cursor.moveToFirst();
         Bebe newBebe = cursorToBebe(cursor);
@@ -143,19 +143,23 @@ public class ApiBibDataSource {
         return newBebe;
     }
 
-    public Bebe modifBebe(Bebe bebe) {
-
-        long idBebe = bebe.getId();
+    public Bebe modifBebe(long id, String nom, String prenom, long age, double poids) {
 
         ContentValues values = new ContentValues();
-        values.put(MySQLiteHelper.COLUMN_NOM, bebe.getNom());
-        values.put(MySQLiteHelper.COLUMN_PRENOM, bebe.getPrenom());
-        values.put(MySQLiteHelper.COLUMN_AGE, bebe.getAge());
-        values.put(MySQLiteHelper.COLUMN_POIDS, bebe.getPoids());
+        values.put(MySQLiteHelper.COLUMN_NOM, nom);
+        values.put(MySQLiteHelper.COLUMN_PRENOM, prenom);
+        values.put(MySQLiteHelper.COLUMN_AGE, age);
+        values.put(MySQLiteHelper.COLUMN_POIDS, poids);
 
-        database.update(MySQLiteHelper.TABLE_BEBE, values, MySQLiteHelper.COLUMN_ID_BEBE + "=?", new String[]{"idBebe"});
+        database.update(MySQLiteHelper.TABLE_BEBE, values, MySQLiteHelper.COLUMN_ID_BEBE + "=?", new String[]{id + ""});
 
-        return bebe;
+        Cursor cursor = database.query(MySQLiteHelper.TABLE_BEBE,
+                allColumnsBebe, MySQLiteHelper.COLUMN_ID_BEBE + " = " + id, null,
+                null, null, null, null);
+        cursor.moveToFirst();
+        Bebe newBebe = cursorToBebe(cursor);
+        cursor.close();
+        return newBebe;
     }
 
     public void deleteBebe(Bebe bebe) {
