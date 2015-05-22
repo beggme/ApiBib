@@ -54,7 +54,11 @@ public class Login extends Activity{
         dataSource = new ApiBibDataSource(this);
         dataSource.open();
 
-        //initialiserBDD();
+        try {
+            initialiserBDD();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
 
         intent = getIntent();
 
@@ -98,6 +102,7 @@ public class Login extends Activity{
             intent = new Intent(this, ParametresInitiaux.class);
             dataSource.close();
             startActivity(intent);
+            finish();
         }
 
     }
@@ -130,6 +135,7 @@ public class Login extends Activity{
                 intent = new Intent(this, ParametresInitiaux.class);
                 dataSource.close();
                 startActivity(intent);
+                finish();
             }else{
                 Toast.makeText(Login.this, "Identifiant ou mot de passe incorrect.",
                         Toast.LENGTH_SHORT).show();

@@ -24,6 +24,7 @@ public class MainActivity extends ActionBarActivity {
         Intent intent = new Intent(MainActivity.this, Login.class);
 
         startActivity(intent);
+        finish();
 
     }
 
