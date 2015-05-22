@@ -218,40 +218,40 @@ public class Login extends Activity{
         dataSource.createBebe(a.getId(),"Youssouf","Imane",1,4);
         dataSource.createBebe(imane.getId(),"Youssouf","Imane",1,4);
         dataSource.createBebe(mehdi.getId(),"Beggas","Panda",1,4);
-        dataSource.createBebe(kevin.getId(),"Bettencourt","Kevin",1,4);
+        Bebe bebe = dataSource.createBebe(kevin.getId(),"Bettencourt","Kevin",1,4);
         dataSource.createBebe(tim.getId(),"Delauriere","Timotchuky",1,4);
         dataSource.createBebe(matt.getId(),"Fravallo","Silvio",1,4);
 
         Date date;
 
         date = format_date_heure.parse("01-01-2015 10:00");
-        dataSource.createRepas(150,2, date,kevin.getId());
+        dataSource.createRepas(150, 2, date,bebe.getId());
         date = format_date_heure.parse("02-01-2015 10:00");
-        dataSource.createRepas(150,2, date,kevin.getId());
+        dataSource.createRepas(150,2, date,bebe.getId());
         date = format_date_heure.parse("02-01-2015 10:00");
-        dataSource.createRepas(150,2, date,kevin.getId());
+        dataSource.createRepas(150,2, date,bebe.getId());
         date = format_date_heure.parse("04-01-2015 10:00");
-        dataSource.createRepas(150,2, date,kevin.getId());
+        dataSource.createRepas(150,2, date,bebe.getId());
         date = format_date_heure.parse("05-01-2015 10:00");
-        dataSource.createRepas(150,2, date,kevin.getId());
+        dataSource.createRepas(150,2, date,bebe.getId());
         date = format_date_heure.parse("06-01-2015 10:00");
-        dataSource.createRepas(150,2, date,kevin.getId());
+        dataSource.createRepas(150,2, date,bebe.getId());
         date = format_date_heure.parse("07-01-2015 10:00");
-        dataSource.createRepas(150,2, date,kevin.getId());
+        dataSource.createRepas(150,2, date,bebe.getId());
         date = format_date_heure.parse("08-01-2015 10:00");
-        dataSource.createRepas(150,2, date,kevin.getId());
+        dataSource.createRepas(150,2, date,bebe.getId());
         date = format_date_heure.parse("09-01-2015 10:00");
-        dataSource.createRepas(150,2, date,kevin.getId());
+        dataSource.createRepas(150,2, date,bebe.getId());
         date = format_date_heure.parse("10-01-2015 10:00");
-        dataSource.createRepas(150,2, date,kevin.getId());
+        dataSource.createRepas(150,2, date,bebe.getId());
         date = format_date_heure.parse("11-01-2015 10:00");
-        dataSource.createRepas(150,2, date,kevin.getId());
+        dataSource.createRepas(150,2, date,bebe.getId());
         date = format_date_heure.parse("12-01-2015 10:00");
-        dataSource.createRepas(150,2, date,kevin.getId());
+        dataSource.createRepas(150,2, date,bebe.getId());
         date = format_date_heure.parse("13-01-2015 10:00");
-        dataSource.createRepas(150,2, date,kevin.getId());
+        dataSource.createRepas(150,2, date,bebe.getId());
         date = format_date_heure.parse("14-01-2015 10:00");
-        dataSource.createRepas(150,2, date,kevin.getId());
+        dataSource.createRepas(150,2, date,bebe.getId());
 
         System.out.println("BDD créé");
 
