@@ -29,7 +29,7 @@ public class ParametrageAlertes extends MenuNavigation implements View.OnClickLi
     private Button modifTimer;
     private Button sup;
     private Singleton s;
-    private long startTime;
+    private long startTime = 10800000;
     private final long interval = 1000;
     private TextView text;
 
