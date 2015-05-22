@@ -15,6 +15,9 @@ import com.facebook.FacebookSdk;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -38,6 +41,8 @@ public class Login extends Activity{
 
     private List<Utilisateur> utilisateurs;
     private List<Bebe> bebes;
+
+    DateFormat format_date_heure = new SimpleDateFormat("dd-MM-yyyy HH:mm");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -192,7 +197,7 @@ public class Login extends Activity{
         return false;
     }*/
 
-    public void initialiserBDD(){
+    public void initialiserBDD() throws ParseException {
         dataSource.deleteAllUtilisateur();
         dataSource.deleteAllBebe();
         dataSource.deleteAllRepas();
@@ -211,7 +216,36 @@ public class Login extends Activity{
         dataSource.createBebe(tim.getId(),"Delauriere","Timotchuky",1,4);
         dataSource.createBebe(matt.getId(),"Fravallo","Silvio",1,4);
 
-        dataSource.createRepas(150,2,new Date(),kevin.getId());
+        Date date;
+
+        date = format_date_heure.parse("01-01-2015 10:00");
+        dataSource.createRepas(150,2, date,kevin.getId());
+        date = format_date_heure.parse("02-01-2015 10:00");
+        dataSource.createRepas(150,2, date,kevin.getId());
+        date = format_date_heure.parse("02-01-2015 10:00");
+        dataSource.createRepas(150,2, date,kevin.getId());
+        date = format_date_heure.parse("04-01-2015 10:00");
+        dataSource.createRepas(150,2, date,kevin.getId());
+        date = format_date_heure.parse("05-01-2015 10:00");
+        dataSource.createRepas(150,2, date,kevin.getId());
+        date = format_date_heure.parse("06-01-2015 10:00");
+        dataSource.createRepas(150,2, date,kevin.getId());
+        date = format_date_heure.parse("07-01-2015 10:00");
+        dataSource.createRepas(150,2, date,kevin.getId());
+        date = format_date_heure.parse("08-01-2015 10:00");
+        dataSource.createRepas(150,2, date,kevin.getId());
+        date = format_date_heure.parse("09-01-2015 10:00");
+        dataSource.createRepas(150,2, date,kevin.getId());
+        date = format_date_heure.parse("10-01-2015 10:00");
+        dataSource.createRepas(150,2, date,kevin.getId());
+        date = format_date_heure.parse("11-01-2015 10:00");
+        dataSource.createRepas(150,2, date,kevin.getId());
+        date = format_date_heure.parse("12-01-2015 10:00");
+        dataSource.createRepas(150,2, date,kevin.getId());
+        date = format_date_heure.parse("13-01-2015 10:00");
+        dataSource.createRepas(150,2, date,kevin.getId());
+        date = format_date_heure.parse("14-01-2015 10:00");
+        dataSource.createRepas(150,2, date,kevin.getId());
 
         System.out.println("BDD créé");
 
